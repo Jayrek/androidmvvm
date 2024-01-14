@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">AndroidMVVM</string>
     <string name="post">Post #: %1$d</string>
+    <string name="post_id">Post #: 10</string>
+    <string name="post_title">Lorem Ipsum Dolor</string>
+    <string name="post_body">This is the post body.. it may be quite long but we\'re truncate it after a few lines</string>
 </resources>
