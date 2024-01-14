@@ -1,15 +1,15 @@
-package com.jrektabasa.androidmvvm.ui
+package com.jrektabasa.androidmvvm.view.screen
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.jrektabasa.androidmvvm.ui.viewmodel.PostViewModel
+import com.jrektabasa.androidmvvm.viewmodel.PostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.jrektabasa.androidmvvm.databinding.ActivityMainBinding
 import com.jrektabasa.androidmvvm.model.Post
-import com.jrektabasa.androidmvvm.ui.adapter.BlogPostAdapter
+import com.jrektabasa.androidmvvm.view.adapter.BlogPostAdapter
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

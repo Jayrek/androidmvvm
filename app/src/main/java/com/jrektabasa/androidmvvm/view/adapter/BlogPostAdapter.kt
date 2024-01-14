@@ -1,4 +1,4 @@
-package com.jrektabasa.androidmvvm.ui.adapter
+package com.jrektabasa.androidmvvm.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

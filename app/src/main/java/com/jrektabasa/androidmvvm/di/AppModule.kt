@@ -1,6 +1,6 @@
-package com.jrektabasa.androidmvvm.di.module
+package com.jrektabasa.androidmvvm.di
 
-import com.jrektabasa.androidmvvm.data.BlogInterface
+import com.jrektabasa.androidmvvm.api.BlogInterface
 import com.jrektabasa.androidmvvm.util.constant.StringConstant
 import dagger.Module
 import dagger.Provides

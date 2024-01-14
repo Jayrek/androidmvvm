@@ -1,4 +1,4 @@
-package com.jrektabasa.androidmvvm.data
+package com.jrektabasa.androidmvvm.api
 
 import com.jrektabasa.androidmvvm.model.Post
 import retrofit2.http.GET
