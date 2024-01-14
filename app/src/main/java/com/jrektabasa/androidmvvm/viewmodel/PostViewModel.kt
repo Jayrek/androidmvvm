@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jrektabasa.androidmvvm.api.BlogInterface
 import com.jrektabasa.androidmvvm.model.Post
 import com.jrektabasa.androidmvvm.repository.BlogRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
