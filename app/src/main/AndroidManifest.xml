@@ -18,7 +18,6 @@
         <activity
             android:name=".view.screen.PostDetailActivity"
             android:exported="false"
-            android:label="@string/title_activity_post_detail"
             android:theme="@style/Theme.AndroidMVVM" />
         <activity
             android:name=".view.screen.MainActivity"
