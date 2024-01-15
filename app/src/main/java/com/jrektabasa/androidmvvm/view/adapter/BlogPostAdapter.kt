@@ -11,6 +11,7 @@ import com.jrektabasa.androidmvvm.model.Post
 class BlogPostAdapter(
     private val context: Context,
     private val posts: MutableList<Post>,
+    private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<BlogPostAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,5 +30,13 @@ class BlogPostAdapter(
         holder.itemBinding.textviewId.text = context.getString(R.string.post, post.id)
         holder.itemBinding.textviewTitle.text = post.title
         holder.itemBinding.textviewBody.text = post.body
+
+        holder.itemBinding.constraintBlogItem.setOnClickListener {
+            onItemClickListener.onClick(post)
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onClick(post: Post)
     }
 }
