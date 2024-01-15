@@ -16,6 +16,9 @@ class PostViewModel @Inject constructor(private val blogRepository: BlogReposito
     private val _posts: MutableLiveData<List<Post>> = MutableLiveData()
     val posts: LiveData<List<Post>> = _posts
 
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     init {
         viewModelScope.launch {
             getPosts()
@@ -24,9 +27,12 @@ class PostViewModel @Inject constructor(private val blogRepository: BlogReposito
 
     suspend fun getPosts() {
         try {
+            _isLoading.value = true
             val response = blogRepository.getPosts()
             _posts.value = response
+            _isLoading.value = false
         } catch (e: Exception) {
+            _isLoading.value = false
             _posts.value = emptyList()
         }
 
