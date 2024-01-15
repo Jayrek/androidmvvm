@@ -1,16 +1,19 @@
 package com.jrektabasa.androidmvvm.view.screen
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.jrektabasa.androidmvvm.viewmodel.PostViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.jrektabasa.androidmvvm.databinding.ActivityMainBinding
 import com.jrektabasa.androidmvvm.model.Post
 import com.jrektabasa.androidmvvm.view.adapter.BlogPostAdapter
+import com.jrektabasa.androidmvvm.viewmodel.PostViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -37,12 +40,26 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun displayPosts() {
+        viewModel.isLoading.observe(this) { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
         viewModel.posts.observe(this) { posts ->
             blogPosts.clear()
             blogPosts.addAll(posts)
             blogPostAdapter.notifyDataSetChanged()
         }
-        blogPostAdapter = BlogPostAdapter(this, blogPosts)
+        blogPostAdapter =
+            BlogPostAdapter(this, blogPosts, object : BlogPostAdapter.OnItemClickListener {
+                override fun onClick(post: Post) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        post.title,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            })
+
         binding.recyclerView.adapter = blogPostAdapter
     }
 }
