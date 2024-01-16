@@ -6,14 +6,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jrektabasa.androidmvvm.databinding.ActivityMainBinding
 import com.jrektabasa.androidmvvm.model.Post
 import com.jrektabasa.androidmvvm.util.constant.IntentKeys.EXTRA_POST_ID
 import com.jrektabasa.androidmvvm.view.adapter.BlogPostAdapter
 import com.jrektabasa.androidmvvm.viewmodel.PostsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var blogPostAdapter: BlogPostAdapter
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     private val viewModel: PostsViewModel by viewModels()
     private val blogPosts = mutableListOf<Post>()
@@ -29,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        linearLayoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = linearLayoutManager
         displayPosts()
         viewModel.getPosts()
     }
@@ -53,5 +56,22 @@ class MainActivity : AppCompatActivity() {
             })
 
         binding.recyclerView.adapter = blogPostAdapter
+
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val visibleItemCount: Int = linearLayoutManager.childCount
+                val totalItemCount: Int = linearLayoutManager.itemCount
+                val firstVisibleItemPosition: Int =
+                    linearLayoutManager.findFirstVisibleItemPosition()
+
+                if (viewModel.isLoading.value == false
+                    && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                    && firstVisibleItemPosition >= 0
+                ) {
+                    viewModel.getPosts()
+                }
+            }
+        })
     }
 }
