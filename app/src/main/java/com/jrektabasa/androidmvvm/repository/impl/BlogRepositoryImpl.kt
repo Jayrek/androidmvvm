@@ -11,8 +11,8 @@ import javax.inject.Singleton
 class BlogRepositoryImpl @Inject constructor(
     private val blogInterface: BlogInterface
 ) : BlogRepository {
-    override suspend fun getPosts(): List<Post> =
-        blogInterface.getPosts()
+    override suspend fun getPosts(page: Int): List<Post> =
+        blogInterface.getPosts(page)
 
     override suspend fun getPostDetails(
         postId: Int
