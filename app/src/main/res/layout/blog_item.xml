@@ -14,7 +14,7 @@
 
         <TextView
             android:id="@+id/textview_id"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/post_id"
@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/textview_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/post_title"
@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/textview_body"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="4dp"
