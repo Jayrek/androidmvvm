@@ -19,24 +19,23 @@ class PostsViewModel @Inject constructor(private val blogRepository: BlogReposit
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    init {
-        viewModelScope.launch {
-            getPosts()
-        }
-    }
+    private var currentPage = 1
 
     fun getPosts() {
         viewModelScope.launch {
             try {
                 _isLoading.value = true
-                val response = blogRepository.getPosts()
-                _posts.value = response
-                _isLoading.value = false
+                val postResponse = blogRepository.getPosts(
+                    page = currentPage,
+                )
+                currentPage += 1
+                val blogPosts = _posts.value ?: emptyList()
+                _posts.value = blogPosts + postResponse
             } catch (e: Exception) {
-                _isLoading.value = false
                 _posts.value = emptyList()
+            } finally {
+                _isLoading.value = false
             }
-
         }
     }
 }
