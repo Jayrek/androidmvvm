@@ -11,13 +11,13 @@
         android:label="Posts"
         tools:layout="@layout/fragment_post" />
     <fragment
-        android:id="@+id/todoFragment"
-        android:name="com.jrektabasa.androidmvvm.view.screen.fragment.TodoFragment"
-        android:label="fragment_todo"
-        tools:layout="@layout/fragment_todo" />
-    <fragment
         android:id="@+id/albumFragment"
         android:name="com.jrektabasa.androidmvvm.view.screen.fragment.AlbumFragment"
         android:label="Albums"
         tools:layout="@layout/fragment_album" />
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="com.jrektabasa.androidmvvm.view.screen.fragment.TodoFragment"
+        android:label="fragment_todo"
+        tools:layout="@layout/fragment_todo" />
 </navigation>
