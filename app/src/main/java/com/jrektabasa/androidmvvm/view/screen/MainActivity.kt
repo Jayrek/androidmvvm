@@ -30,13 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         displayPosts()
-        getPosts()
-    }
-
-    private fun getPosts() {
-        lifecycleScope.launch {
-            viewModel.getPosts()
-        }
+        viewModel.getPosts()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -52,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         blogPostAdapter =
             BlogPostAdapter(this, blogPosts, object : BlogPostAdapter.OnItemClickListener {
                 override fun onClick(post: Post) {
-                    val intent = Intent(this@MainActivity, PostDetailActivity::class.java)
+                    val intent = Intent(this@MainActivity, PostDetailsActivity::class.java)
                     intent.putExtra(EXTRA_POST_ID, post.id)
                     startActivity(intent)
                 }
