@@ -25,16 +25,18 @@ class PostsViewModel @Inject constructor(private val blogRepository: BlogReposit
         }
     }
 
-    suspend fun getPosts() {
-        try {
-            _isLoading.value = true
-            val response = blogRepository.getPosts()
-            _posts.value = response
-            _isLoading.value = false
-        } catch (e: Exception) {
-            _isLoading.value = false
-            _posts.value = emptyList()
-        }
+    fun getPosts() {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                val response = blogRepository.getPosts()
+                _posts.value = response
+                _isLoading.value = false
+            } catch (e: Exception) {
+                _isLoading.value = false
+                _posts.value = emptyList()
+            }
 
+        }
     }
 }
