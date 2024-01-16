@@ -16,7 +16,7 @@
         android:theme="@style/Theme.AndroidMVVM"
         tools:targetApi="31" >
         <activity
-            android:name=".view.screen.PostDetailActivity"
+            android:name=".view.screen.PostDetailsActivity"
             android:exported="false"
             android:theme="@style/Theme.AndroidMVVM" />
         <activity
