@@ -32,6 +32,8 @@ class PostDetailsViewModel @Inject constructor(
                 _isLoading.value = true
                 val post = blogRepository.getPostDetails(postId)
                 val user = blogRepository.getUserDetails(post.userId)
+                val comments = blogRepository.getPostComments(post.id)
+                Log.i("comments", "getPostDetail: $comments")
                 _postDetail.value = post
                 _userDetail.value = user
                 _isLoading.value = false
