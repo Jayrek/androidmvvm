@@ -1,5 +1,6 @@
 package com.jrektabasa.androidmvvm.api
 
+import com.jrektabasa.androidmvvm.model.Comment
 import com.jrektabasa.androidmvvm.model.Post
 import com.jrektabasa.androidmvvm.model.User
 import retrofit2.http.GET
@@ -19,4 +20,7 @@ interface BlogInterface {
 
     @GET("users/{id}")
     suspend fun getUserDetails(@Path("id") userId: Int): User
+
+    @GET("comments")
+    suspend fun getPostComments(@Query("postId") postId: Int): List<Comment>
 }
