@@ -43,15 +43,8 @@ class PostDetailFragment : Fragment() {
 
         viewModel.userDetails.observe(requireActivity()) { user ->
             user.let {
-
-                binding.textviewLabelName.text = getString(R.string.label_name)
-                binding.textviewLabelUserName.text = getString(R.string.label_user_name)
-                binding.textviewLabelEmail.text = getString(R.string.label_email)
-                binding.textviewLabelWebsite.text = getString(R.string.label_website)
-
                 binding.textviewName.text = user?.name
-                binding.textviewUserName.text = user?.username
-                binding.textviewUserEmail.text = user?.email
+                binding.textviewUserEmail.text = user?.email?.lowercase()
                 binding.textviewWebview.text = user?.website
             }
         }
