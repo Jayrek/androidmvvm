@@ -12,4 +12,5 @@
     <string name="label_user_name">Username</string>
     <string name="label_email">Email</string>
     <string name="label_website">Website</string>
+    <string name="label_comments">Comments</string>
 </resources>

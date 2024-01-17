@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.jrektabasa.androidmvvm.R
 import com.jrektabasa.androidmvvm.databinding.FragmentPostDetailBinding
 import com.jrektabasa.androidmvvm.model.Comment
 import com.jrektabasa.androidmvvm.view.adapter.PostCommentAdapter
@@ -46,7 +47,7 @@ class PostDetailFragment : Fragment() {
         viewModel.postDetail.observe(requireActivity()) { post ->
             binding.textviewPostTitle.text = post?.title
             binding.textviewPostBody.text = post?.body
-            binding.textviewLabelComments.text = "Comments"
+            binding.textviewLabelComments.text = getString(R.string.label_comments)
         }
 
         viewModel.userDetails.observe(requireActivity()) { user ->
