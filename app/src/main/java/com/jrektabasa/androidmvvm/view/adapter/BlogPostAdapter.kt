@@ -1,6 +1,5 @@
 package com.jrektabasa.androidmvvm.view.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +7,6 @@ import com.jrektabasa.androidmvvm.databinding.BlogItemBinding
 import com.jrektabasa.androidmvvm.model.Post
 
 class BlogPostAdapter(
-    private val context: Context,
     private val posts: MutableList<Post>,
     private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<BlogPostAdapter.ViewHolder>() {

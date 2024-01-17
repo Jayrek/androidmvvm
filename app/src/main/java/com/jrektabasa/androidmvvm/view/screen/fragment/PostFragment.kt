@@ -55,7 +55,6 @@ class PostFragment : Fragment() {
         }
         blogPostAdapter =
             BlogPostAdapter(
-                requireContext(),
                 blogPosts,
                 object : BlogPostAdapter.OnItemClickListener {
                     override fun onClick(post: Post) {
