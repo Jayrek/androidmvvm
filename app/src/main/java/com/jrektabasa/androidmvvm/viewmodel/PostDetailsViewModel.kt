@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jrektabasa.androidmvvm.model.Comment
 import com.jrektabasa.androidmvvm.model.Post
 import com.jrektabasa.androidmvvm.model.User
 import com.jrektabasa.androidmvvm.repository.BlogRepository
@@ -23,6 +24,9 @@ class PostDetailsViewModel @Inject constructor(
     private val _postDetail: MutableLiveData<Post?> = MutableLiveData()
     val postDetail: LiveData<Post?> = _postDetail
 
+    private val _comments: MutableLiveData<List<Comment>> = MutableLiveData(emptyList())
+    val comments: LiveData<List<Comment>> = _comments
+
     private val _userDetail: MutableLiveData<User?> = MutableLiveData()
     val userDetails: LiveData<User?> = _userDetail
 
@@ -33,9 +37,9 @@ class PostDetailsViewModel @Inject constructor(
                 val post = blogRepository.getPostDetails(postId)
                 val user = blogRepository.getUserDetails(post.userId)
                 val comments = blogRepository.getPostComments(post.id)
-                Log.i("comments", "getPostDetail: $comments")
                 _postDetail.value = post
                 _userDetail.value = user
+                _comments.value = comments
                 _isLoading.value = false
             } catch (e: Exception) {
                 _isLoading.value = false
