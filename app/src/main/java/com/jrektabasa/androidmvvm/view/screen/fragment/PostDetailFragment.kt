@@ -1,5 +1,6 @@
 package com.jrektabasa.androidmvvm.view.screen.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,8 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.jrektabasa.androidmvvm.R
 import com.jrektabasa.androidmvvm.databinding.FragmentPostDetailBinding
+import com.jrektabasa.androidmvvm.model.Comment
+import com.jrektabasa.androidmvvm.view.adapter.PostCommentAdapter
 import com.jrektabasa.androidmvvm.viewmodel.PostDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,6 +19,9 @@ class PostDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentPostDetailBinding
     private val viewModel: PostDetailsViewModel by viewModels()
+    private lateinit var postCommentAdapter: PostCommentAdapter
+
+    private val postComments = mutableListOf<Comment>()
 
     private val args: PostDetailFragmentArgs by navArgs()
 
@@ -28,28 +33,35 @@ class PostDetailFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getPostDetail(args.postId)
 
         viewModel.isLoading.observe(requireActivity()) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
         viewModel.postDetail.observe(requireActivity()) { post ->
-            binding.textviewPostId.text = requireActivity().getString(R.string.post, post?.id)
             binding.textviewPostTitle.text = post?.title
             binding.textviewPostBody.text = post?.body
+            binding.textviewLabelComments.text = "Comments"
         }
 
         viewModel.userDetails.observe(requireActivity()) { user ->
-            user.let {
-                binding.textviewName.text = user?.name
-                binding.textviewUserEmail.text = user?.email?.lowercase()
-                binding.textviewWebview.text = user?.website
-            }
+            binding.textviewName.text = user?.name
         }
 
-        viewModel.getPostDetail(args.postId)
+        postCommentAdapter = PostCommentAdapter(postComments)
+
+        viewModel.comments.observe(requireActivity()) { comments ->
+            postComments.clear()
+            postComments.addAll(comments)
+            postCommentAdapter.notifyDataSetChanged()
+        }
+
+        binding.recyclerView.adapter = postCommentAdapter
     }
 
 }
