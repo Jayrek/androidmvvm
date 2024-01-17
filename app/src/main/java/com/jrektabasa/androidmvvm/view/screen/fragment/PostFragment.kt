@@ -1,15 +1,16 @@
 package com.jrektabasa.androidmvvm.view.screen.fragment
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jrektabasa.androidmvvm.R
 import com.jrektabasa.androidmvvm.databinding.FragmentPostBinding
 import com.jrektabasa.androidmvvm.model.Post
 import com.jrektabasa.androidmvvm.util.constant.IntentKeys
@@ -61,9 +62,11 @@ class PostFragment : Fragment() {
                 blogPosts,
                 object : BlogPostAdapter.OnItemClickListener {
                     override fun onClick(post: Post) {
-                        val intent = Intent(activity, PostDetailsActivity::class.java)
-                        intent.putExtra(IntentKeys.EXTRA_POST_ID, post.id)
-                        startActivity(intent)
+                        val action =
+                            PostFragmentDirections
+                                .actionPostFragmentToPostDetailFragment()
+                                .setPostId(post.id)
+                        findNavController().navigate(action)
                     }
                 })
 
