@@ -8,16 +8,30 @@
     <fragment
         android:id="@+id/postFragment"
         android:name="com.jrektabasa.androidmvvm.view.screen.fragment.PostFragment"
-        android:label="Posts"
-        tools:layout="@layout/fragment_post" />
+        android:label="@string/nav_posts"
+        tools:layout="@layout/fragment_post">
+        <action
+            android:id="@+id/action_postFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.jrektabasa.androidmvvm.view.screen.fragment.AlbumFragment"
-        android:label="Albums"
+        android:label="@string/nav_albums"
         tools:layout="@layout/fragment_album" />
     <fragment
         android:id="@+id/todoFragment"
         android:name="com.jrektabasa.androidmvvm.view.screen.fragment.TodoFragment"
-        android:label="fragment_todo"
+        android:label="@string/nav_todos"
         tools:layout="@layout/fragment_todo" />
+    <fragment
+        android:id="@+id/postDetailFragment"
+        android:name="com.jrektabasa.androidmvvm.view.screen.fragment.PostDetailFragment"
+        android:label="@string/post_details"
+        tools:layout="@layout/fragment_post_detail">
+        <argument
+            android:name="postId"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </fragment>
 </navigation>
