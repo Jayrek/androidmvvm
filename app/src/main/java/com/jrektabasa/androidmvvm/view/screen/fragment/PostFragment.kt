@@ -10,12 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.jrektabasa.androidmvvm.R
 import com.jrektabasa.androidmvvm.databinding.FragmentPostBinding
 import com.jrektabasa.androidmvvm.model.Post
-import com.jrektabasa.androidmvvm.util.constant.IntentKeys
 import com.jrektabasa.androidmvvm.view.adapter.BlogPostAdapter
-import com.jrektabasa.androidmvvm.view.screen.PostDetailsActivity
 import com.jrektabasa.androidmvvm.viewmodel.PostsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
