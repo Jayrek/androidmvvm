@@ -30,7 +30,8 @@ class BlogRepositoryImpl @Inject constructor(
     override suspend fun getPostComments(postId: Int): List<Comment> =
         blogInterface.getPostComments(postId)
 
-    override suspend fun getTodos(): List<Todo> = blogInterface.getTodos()
+    override suspend fun getTodos(page: Int): List<Todo> = blogInterface.getTodos(page)
+
     override suspend fun getAlbums(): List<Album> = blogInterface.getAlbums()
 
 }
