@@ -33,5 +33,8 @@ interface BlogInterface {
     ): List<Todo>
 
     @GET("albums")
-    suspend fun getAlbums(): List<Album>
+    suspend fun getAlbums(
+        @Query("_page") page: Int,
+        @Query("_limit") limit: Int = 10,
+    ): List<Album>
 }
