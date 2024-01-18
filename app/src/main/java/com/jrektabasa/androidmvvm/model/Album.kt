@@ -1,7 +1,13 @@
 package com.jrektabasa.androidmvvm.model
 
 data class Album(
-    val userId: String,
-    val id: String,
+    val userId: Int,
+    val id: Int,
     val title: String
 )
+
+data class UserAlbum(
+    val userId: Int,
+    val id: Int,
+    val title: String,
+    val userName: String)
