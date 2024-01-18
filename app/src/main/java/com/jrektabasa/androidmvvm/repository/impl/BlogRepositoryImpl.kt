@@ -3,6 +3,7 @@ package com.jrektabasa.androidmvvm.repository.impl
 import com.jrektabasa.androidmvvm.api.BlogInterface
 import com.jrektabasa.androidmvvm.model.Comment
 import com.jrektabasa.androidmvvm.model.Post
+import com.jrektabasa.androidmvvm.model.Todo
 import com.jrektabasa.androidmvvm.model.User
 import com.jrektabasa.androidmvvm.repository.BlogRepository
 import javax.inject.Inject
@@ -27,5 +28,7 @@ class BlogRepositoryImpl @Inject constructor(
 
     override suspend fun getPostComments(postId: Int): List<Comment> =
         blogInterface.getPostComments(postId)
+
+    override suspend fun getTodos(): List<Todo> = blogInterface.getTodos()
 
 }
