@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jrektabasa.androidmvvm.databinding.AlbumItemBinding
-import com.jrektabasa.androidmvvm.model.Album
+import com.jrektabasa.androidmvvm.model.UserAlbum
 
-class AlbumAdapter(private val albums: MutableList<Album>) :
+class AlbumAdapter(private val albums: MutableList<UserAlbum>) :
     RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = AlbumItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -20,6 +20,7 @@ class AlbumAdapter(private val albums: MutableList<Album>) :
         val album = albums[position]
 
         holder.itemBinding.textviewTitle.text = album.title
+        holder.itemBinding.textviewUserName.text = album.userName
     }
 
     override fun getItemCount(): Int = albums.size
