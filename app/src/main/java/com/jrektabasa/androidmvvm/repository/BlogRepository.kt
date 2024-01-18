@@ -1,5 +1,6 @@
 package com.jrektabasa.androidmvvm.repository
 
+import com.jrektabasa.androidmvvm.model.Album
 import com.jrektabasa.androidmvvm.model.Comment
 import com.jrektabasa.androidmvvm.model.Post
 import com.jrektabasa.androidmvvm.model.Todo
@@ -12,5 +13,6 @@ interface BlogRepository {
     suspend fun getUserDetails(userId: Int): User
     suspend fun getPostComments(postId: Int): List<Comment>
     suspend fun getTodos(): List<Todo>
+    suspend fun getAlbums(): List<Album>
 
 }
