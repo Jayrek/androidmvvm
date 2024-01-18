@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jrektabasa.androidmvvm.databinding.FragmentPostBinding
 import com.jrektabasa.androidmvvm.model.Post
-import com.jrektabasa.androidmvvm.view.adapter.BlogPostAdapter
+import com.jrektabasa.androidmvvm.view.adapter.PostAdapter
 import com.jrektabasa.androidmvvm.viewmodel.PostsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class PostFragment : Fragment() {
 
     private lateinit var binding: FragmentPostBinding
-    private lateinit var blogPostAdapter: BlogPostAdapter
+    private lateinit var postAdapter: PostAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     private val viewModel: PostsViewModel by viewModels()
@@ -51,12 +51,12 @@ class PostFragment : Fragment() {
         viewModel.posts.observe(requireActivity()) { posts ->
             blogPosts.clear()
             blogPosts.addAll(posts)
-            blogPostAdapter.notifyDataSetChanged()
+            postAdapter.notifyDataSetChanged()
         }
-        blogPostAdapter =
-            BlogPostAdapter(
+        postAdapter =
+            PostAdapter(
                 blogPosts,
-                object : BlogPostAdapter.OnItemClickListener {
+                object : PostAdapter.OnItemClickListener {
                     override fun onClick(post: Post) {
                         val action =
                             PostFragmentDirections
@@ -66,7 +66,7 @@ class PostFragment : Fragment() {
                     }
                 })
 
-        binding.recyclerView.adapter = blogPostAdapter
+        binding.recyclerView.adapter = postAdapter
 
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

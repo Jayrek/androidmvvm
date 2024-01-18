@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jrektabasa.androidmvvm.databinding.BlogItemBinding
 import com.jrektabasa.androidmvvm.model.Post
 
-class BlogPostAdapter(
+class PostAdapter(
     private val posts: MutableList<Post>,
     private val onItemClickListener: OnItemClickListener
-) : RecyclerView.Adapter<BlogPostAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = BlogItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
