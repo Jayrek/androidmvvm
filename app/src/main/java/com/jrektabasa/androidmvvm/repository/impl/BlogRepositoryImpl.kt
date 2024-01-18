@@ -24,6 +24,8 @@ class BlogRepositoryImpl @Inject constructor(
         userId: Int
     ): User = blogInterface.getUserDetails(userId)
 
+    override suspend fun getUsers(): List<User> = blogInterface.getUsers()
+
     override suspend fun getPostComments(postId: Int): List<Comment> =
         blogInterface.getPostComments(postId)
 
