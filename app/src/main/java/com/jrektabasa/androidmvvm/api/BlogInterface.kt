@@ -14,7 +14,7 @@ interface BlogInterface {
     @GET("posts")
     suspend fun getPosts(
         @Query("_page") page: Int,
-        @Query("_limit") limit: Int = 10
+        @Query("_limit") limit: Int = 10,
     ): List<Post>
 
     @GET("posts/{id}")
@@ -27,7 +27,10 @@ interface BlogInterface {
     suspend fun getPostComments(@Query("postId") postId: Int): List<Comment>
 
     @GET("todos")
-    suspend fun getTodos(): List<Todo>
+    suspend fun getTodos(
+        @Query("_page") page: Int,
+        @Query("_limit") limit: Int = 10,
+    ): List<Todo>
 
     @GET("albums")
     suspend fun getAlbums(): List<Album>
