@@ -3,13 +3,13 @@
     android:id="@+id/constraint_blog_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="12dp"
     android:background="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
         android:orientation="vertical">
 
         <TextView
