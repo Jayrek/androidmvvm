@@ -19,6 +19,9 @@ class TodoAdapter(private val todos: MutableList<Todo>) :
 
     override fun onBindViewHolder(holder: TodoAdapter.ViewHolder, position: Int) {
         val todo = todos[position]
+
+        holder.itemBinding.textviewTitle.text = todo.title
+        holder.itemBinding.textviewCompleted.text = todo.completed.toString()
     }
 
     override fun getItemCount(): Int = todos.size
