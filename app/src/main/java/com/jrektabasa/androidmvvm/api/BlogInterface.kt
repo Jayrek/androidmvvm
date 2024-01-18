@@ -1,5 +1,6 @@
 package com.jrektabasa.androidmvvm.api
 
+import com.jrektabasa.androidmvvm.model.Album
 import com.jrektabasa.androidmvvm.model.Comment
 import com.jrektabasa.androidmvvm.model.Post
 import com.jrektabasa.androidmvvm.model.Todo
@@ -27,4 +28,7 @@ interface BlogInterface {
 
     @GET("todos")
     suspend fun getTodos(): List<Todo>
+
+    @GET("albums")
+    suspend fun getAlbums(): List<Album>
 }
