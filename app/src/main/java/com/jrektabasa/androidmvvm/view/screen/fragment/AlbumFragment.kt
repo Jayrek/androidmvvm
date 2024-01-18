@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jrektabasa.androidmvvm.databinding.FragmentAlbumBinding
-import com.jrektabasa.androidmvvm.model.Album
+import com.jrektabasa.androidmvvm.model.UserAlbum
 import com.jrektabasa.androidmvvm.view.adapter.AlbumAdapter
 import com.jrektabasa.androidmvvm.viewmodel.AlbumViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +23,7 @@ class AlbumFragment : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     private val viewModel: AlbumViewModel by viewModels()
-    private val albumList = mutableListOf<Album>()
+    private val userAlbums = mutableListOf<UserAlbum>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,11 +40,11 @@ class AlbumFragment : Fragment() {
 
         viewModel.getAlbums()
 
-        albumAdapter = AlbumAdapter(albumList)
+        albumAdapter = AlbumAdapter(userAlbums)
 
-        viewModel.albums.observe(requireActivity()) { albums ->
-            albumList.clear()
-            albumList.addAll(albums)
+        viewModel.userAlbums.observe(requireActivity()) { albums ->
+            userAlbums.clear()
+            userAlbums.addAll(albums)
             albumAdapter.notifyDataSetChanged()
         }
 
