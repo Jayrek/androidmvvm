@@ -13,6 +13,6 @@ interface BlogRepository {
     suspend fun getUserDetails(userId: Int): User
     suspend fun getPostComments(postId: Int): List<Comment>
     suspend fun getTodos(page: Int): List<Todo>
-    suspend fun getAlbums(): List<Album>
+    suspend fun getAlbums(page: Int): List<Album>
 
 }

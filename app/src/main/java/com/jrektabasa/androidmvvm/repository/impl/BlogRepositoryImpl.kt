@@ -14,24 +14,21 @@ import javax.inject.Singleton
 class BlogRepositoryImpl @Inject constructor(
     private val blogInterface: BlogInterface
 ) : BlogRepository {
-    override suspend fun getPosts(page: Int): List<Post> =
-        blogInterface.getPosts(page)
+    override suspend fun getPosts(page: Int): List<Post> = blogInterface.getPosts(page)
 
     override suspend fun getPostDetails(
         postId: Int
-    ): Post =
-        blogInterface.getPostDetails(postId)
+    ): Post = blogInterface.getPostDetails(postId)
 
     override suspend fun getUserDetails(
         userId: Int
-    ): User =
-        blogInterface.getUserDetails(userId)
+    ): User = blogInterface.getUserDetails(userId)
 
     override suspend fun getPostComments(postId: Int): List<Comment> =
         blogInterface.getPostComments(postId)
 
     override suspend fun getTodos(page: Int): List<Todo> = blogInterface.getTodos(page)
 
-    override suspend fun getAlbums(): List<Album> = blogInterface.getAlbums()
+    override suspend fun getAlbums(page: Int): List<Album> = blogInterface.getAlbums(page)
 
 }
