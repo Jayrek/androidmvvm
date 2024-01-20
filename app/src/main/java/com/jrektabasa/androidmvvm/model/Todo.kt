@@ -4,5 +4,5 @@ data class Todo(
     val userID: Int,
     val id: Int,
     val title: String,
-    val completed: Boolean
+    var completed: Boolean
 )
