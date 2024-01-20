@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jrektabasa.androidmvvm.databinding.TodoItemBinding
 import com.jrektabasa.androidmvvm.model.Todo
 
-class TodoAdapter(private val todos: MutableList<Todo>) :
+class TodoAdapter(
+    private val todos: MutableList<Todo>,
+    private val onItemListener: OnItemListener,
+) :
     RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoAdapter.ViewHolder {
@@ -21,8 +24,22 @@ class TodoAdapter(private val todos: MutableList<Todo>) :
         val todo = todos[position]
 
         holder.itemBinding.textviewTitle.text = todo.title
-        holder.itemBinding.textviewCompleted.text = todo.completed.toString()
+
+        holder.itemBinding.checkboxStatus.text = if (todo.completed) "Done" else "Not Started"
+        if (todo.completed) {
+            holder.itemBinding.checkboxStatus.isChecked = true
+            holder.itemBinding.checkboxStatus.isEnabled = false
+            holder.itemBinding.textviewTitle.setTextAppearance(android.R.style.TextAppearance_Medium_Inverse)
+        }
+        holder.itemBinding.checkboxStatus.setOnCheckedChangeListener { _, isChecked ->
+            onItemListener.onCheck(todo.id, isChecked)
+        }
+
     }
 
     override fun getItemCount(): Int = todos.size
+
+    interface OnItemListener {
+        fun onCheck(position: Int, isChecked: Boolean)
+    }
 }
