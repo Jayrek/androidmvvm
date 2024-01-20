@@ -19,27 +19,16 @@ class TodoViewModel @Inject constructor(
     private val _todos: MutableLiveData<List<Todo>> = MutableLiveData(emptyList())
     val todos: LiveData<List<Todo>> = _todos
 
-    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData()
-    val isLoading: LiveData<Boolean> = _isLoading
-
-
-    private var currentPage = 1
-
-    fun getTodos() {
+    fun getTodos(userId: Int) {
         viewModelScope.launch {
             try {
-                _isLoading.value = true
                 val todoResponse = blogRepository.getTodos(
-                    page = currentPage,
+                    userId,
                 )
-                currentPage += 1
-                val blogTodos = _todos.value ?: emptyList()
-                _todos.value = blogTodos + todoResponse
+                _todos.value = todoResponse
             } catch (e: Exception) {
                 Log.e("TAG", "getTodos: ${e.message}")
                 _todos.value = emptyList()
-            } finally {
-                _isLoading.value = false
             }
         }
     }
