@@ -2,6 +2,7 @@ package com.jrektabasa.androidmvvm.api
 
 import com.jrektabasa.androidmvvm.model.Album
 import com.jrektabasa.androidmvvm.model.Comment
+import com.jrektabasa.androidmvvm.model.Photo
 import com.jrektabasa.androidmvvm.model.Post
 import com.jrektabasa.androidmvvm.model.Todo
 import com.jrektabasa.androidmvvm.model.User
@@ -31,8 +32,7 @@ interface BlogInterface {
 
     @GET("todos")
     suspend fun getTodos(
-        @Query("_page") page: Int,
-        @Query("_limit") limit: Int = 10,
+        @Query("userId") page: Int,
     ): List<Todo>
 
     @GET("albums")
@@ -40,4 +40,11 @@ interface BlogInterface {
         @Query("_page") page: Int,
         @Query("_limit") limit: Int = 10,
     ): List<Album>
+
+    @GET("photos")
+    suspend fun getPhotos(
+        @Query("albumId") albumId: Int,
+        @Query("_page") page: Int,
+        @Query("_limit") limit: Int = 10,
+    ): List<Photo>
 }
