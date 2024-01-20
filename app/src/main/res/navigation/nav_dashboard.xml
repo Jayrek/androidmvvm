@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_dashboard"
+    android:label="Photos"
     app:startDestination="@id/postFragment">
 
     <fragment
@@ -18,12 +19,20 @@
         android:id="@+id/albumFragment"
         android:name="com.jrektabasa.androidmvvm.view.screen.fragment.AlbumFragment"
         android:label="@string/nav_albums"
-        tools:layout="@layout/fragment_album" />
+        tools:layout="@layout/fragment_album">
+        <action
+            android:id="@+id/action_albumFragment_to_photoFragment"
+            app:destination="@id/photoFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/todoFragment"
-        android:name="com.jrektabasa.androidmvvm.view.screen.fragment.TodoFragment"
+        android:id="@+id/todoUserFragment"
+        android:name="com.jrektabasa.androidmvvm.view.screen.fragment.TodoUserFragment"
         android:label="@string/nav_todos"
-        tools:layout="@layout/fragment_todo" />
+        tools:layout="@layout/fragment_todo_user" >
+        <action
+            android:id="@+id/action_todoUserFragment_to_todoFragment"
+            app:destination="@id/todoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/postDetailFragment"
         android:name="com.jrektabasa.androidmvvm.view.screen.fragment.PostDetailFragment"
@@ -31,6 +40,26 @@
         tools:layout="@layout/fragment_post_detail">
         <argument
             android:name="postId"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.jrektabasa.androidmvvm.view.screen.fragment.PhotoFragment"
+        android:label="@string/album_photos"
+        tools:layout="@layout/fragment_photo">
+        <argument
+            android:name="albumId"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="com.jrektabasa.androidmvvm.view.screen.fragment.TodoFragment"
+        android:label="User's Todo(s)"
+        tools:layout="@layout/fragment_todo" >
+        <argument
+            android:name="userId"
             android:defaultValue="1"
             app:argType="integer" />
     </fragment>
