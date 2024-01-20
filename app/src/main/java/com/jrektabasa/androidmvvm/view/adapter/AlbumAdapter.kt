@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jrektabasa.androidmvvm.databinding.AlbumItemBinding
 import com.jrektabasa.androidmvvm.model.UserAlbum
 
-class AlbumAdapter(private val albums: MutableList<UserAlbum>) :
+class AlbumAdapter(
+    private val albums: MutableList<UserAlbum>,
+    private val onItemListener: OnItemListener,
+) :
     RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = AlbumItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -20,10 +23,17 @@ class AlbumAdapter(private val albums: MutableList<UserAlbum>) :
         val album = albums[position]
 
         holder.itemBinding.textviewTitle.text = album.title
-        holder.itemBinding.textviewUserName.text = album.userName
+        holder.itemBinding.textviewUserName.text = "by: ${album.userName}"
+        holder.itemBinding.cardView.setOnClickListener {
+            onItemListener.onTap(position)
+        }
     }
 
     override fun getItemCount(): Int = albums.size
+
+    interface OnItemListener {
+        fun onTap(position: Int)
+    }
 }
 
 
