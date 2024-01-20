@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_photo_library"
         android:title="@string/nav_albums" />
     <item
-        android:id="@+id/todoFragment"
+        android:id="@+id/todoUserFragment"
         android:icon="@drawable/ic_baseline_checklist"
         android:title="@string/nav_todos" />
 </menu>
