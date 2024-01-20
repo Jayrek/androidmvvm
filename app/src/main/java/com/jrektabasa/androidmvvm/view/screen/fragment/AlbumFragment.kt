@@ -7,7 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jrektabasa.androidmvvm.databinding.FragmentAlbumBinding
 import com.jrektabasa.androidmvvm.model.UserAlbum
@@ -20,7 +21,7 @@ class AlbumFragment : Fragment() {
 
     private lateinit var binding: FragmentAlbumBinding
     private lateinit var albumAdapter: AlbumAdapter
-    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var gridLayoutManager: GridLayoutManager
 
     private val viewModel: AlbumViewModel by viewModels()
     private val userAlbums = mutableListOf<UserAlbum>()
@@ -35,12 +36,20 @@ class AlbumFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        linearLayoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.layoutManager = linearLayoutManager
+        gridLayoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerView.layoutManager = gridLayoutManager
 
         viewModel.getAlbums()
 
-        albumAdapter = AlbumAdapter(userAlbums)
+        albumAdapter = AlbumAdapter(userAlbums, object : AlbumAdapter.OnItemListener {
+            override fun onTap(position: Int) {
+                val action =
+                    AlbumFragmentDirections.actionAlbumFragmentToPhotoFragment()
+                        .setAlbumId(userAlbums[position].id)
+                findNavController().navigate(action)
+            }
+
+        })
 
         viewModel.userAlbums.observe(requireActivity()) { albums ->
             userAlbums.clear()
@@ -53,10 +62,10 @@ class AlbumFragment : Fragment() {
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val visibleItemCount: Int = linearLayoutManager.childCount
-                val totalItemCount: Int = linearLayoutManager.itemCount
+                val visibleItemCount: Int = gridLayoutManager.childCount
+                val totalItemCount: Int = gridLayoutManager.itemCount
                 val firstVisibleItemPosition: Int =
-                    linearLayoutManager.findFirstVisibleItemPosition()
+                    gridLayoutManager.findFirstVisibleItemPosition()
 
                 if (viewModel.isLoading.value == false
                     && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount
