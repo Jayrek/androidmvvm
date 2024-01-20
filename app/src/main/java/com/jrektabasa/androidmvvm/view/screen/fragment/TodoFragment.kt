@@ -2,13 +2,14 @@ package com.jrektabasa.androidmvvm.view.screen.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.jrektabasa.androidmvvm.databinding.FragmentTodoBinding
 import com.jrektabasa.androidmvvm.model.Todo
 import com.jrektabasa.androidmvvm.view.adapter.TodoAdapter
@@ -23,7 +24,10 @@ class TodoFragment : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     private val viewModel: TodoViewModel by viewModels()
+
     private val todosList = mutableListOf<Todo>()
+
+    private val args: TodoFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,34 +43,29 @@ class TodoFragment : Fragment() {
         linearLayoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.layoutManager = linearLayoutManager
 
-        viewModel.getTodos()
+        viewModel.getTodos(args.userId)
 
-        todoAdapter = TodoAdapter(todosList)
+        todoAdapter = TodoAdapter(todosList, object : TodoAdapter.OnItemListener {
+            override fun onCheck(position: Int, isChecked: Boolean) {
+                if(isChecked){
+                    Log.d("isChecked", "onCheck: $isChecked")
+//                    todosList[position].completed = true
+//                    todoAdapter.notifyItemChanged(position)
+                }else {
 
-        viewModel.todos.observe(requireActivity()) { todos ->
+                    Log.d("!isChecked", "onCheck: $isChecked")
+                }
+            }
+
+        })
+
+        viewModel.todos.observe(requireActivity()) {
             todosList.clear()
-            todosList.addAll(todos)
+            todosList.addAll(it)
             todoAdapter.notifyDataSetChanged()
         }
 
         binding.recyclerView.adapter = todoAdapter
-
-        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val visibleItemCount: Int = linearLayoutManager.childCount
-                val totalItemCount: Int = linearLayoutManager.itemCount
-                val firstVisibleItemPosition: Int =
-                    linearLayoutManager.findFirstVisibleItemPosition()
-
-                if (viewModel.isLoading.value == false
-                    && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                    && firstVisibleItemPosition >= 0
-                ) {
-                    viewModel.getTodos()
-                }
-            }
-        })
     }
 
 }
