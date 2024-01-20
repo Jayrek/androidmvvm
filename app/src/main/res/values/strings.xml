@@ -8,9 +8,11 @@
     <string name="nav_albums">Albums</string>
     <string name="nav_todos">Todos</string>
     <string name="post_details">Post Details</string>
+    <string name="album_photos">Photos</string>
     <string name="label_name">Name</string>
     <string name="label_user_name">Username</string>
     <string name="label_email">Email</string>
     <string name="label_website">Website</string>
     <string name="label_comments">Comments</string>
+    <string name="photo_desc">Photo</string>
 </resources>
