@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jrektabasa.androidmvvm.R
 import com.jrektabasa.androidmvvm.databinding.FragmentPostDetailBinding
 import com.jrektabasa.androidmvvm.model.Comment
@@ -31,6 +33,11 @@ class PostDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPostDetailBinding.inflate(inflater, container, false)
+
+        with(binding.recyclerView) {
+            val divider = DividerItemDecoration(context, LinearLayoutManager(context).orientation)
+            addItemDecoration(divider)
+        }
         return binding.root
     }
 
