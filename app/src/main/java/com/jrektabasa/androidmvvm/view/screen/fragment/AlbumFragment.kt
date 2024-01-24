@@ -41,15 +41,16 @@ class AlbumFragment : Fragment() {
 
         viewModel.getAlbums()
 
-        albumAdapter = AlbumAdapter(userAlbums, object : AlbumAdapter.OnItemListener {
-            override fun onTap(position: Int) {
-                val action =
-                    AlbumFragmentDirections.actionAlbumFragmentToPhotoFragment()
-                        .setAlbumId(userAlbums[position].id)
-                findNavController().navigate(action)
-            }
+        albumAdapter =
+            AlbumAdapter(requireContext(), userAlbums, object : AlbumAdapter.OnItemListener {
+                override fun onTap(position: Int) {
+                    val action =
+                        AlbumFragmentDirections.actionAlbumFragmentToPhotoFragment()
+                            .setAlbumId(userAlbums[position].id)
+                    findNavController().navigate(action)
+                }
 
-        })
+            })
 
         viewModel.userAlbums.observe(requireActivity()) { albums ->
             userAlbums.clear()
